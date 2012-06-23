@@ -1,0 +1,95 @@
+		.slider-container {
+			width: 600px; /* Width of the container!! */
+			position: relative;
+			border: 1px solid #000000;
+			-moz-border-radius: 5px;
+			-webkit-border-radius: 5px;
+			border-radius: 5px;
+			height: 30px;
+			overflow: hidden;
+			background-color: #FFFFFF;
+		}
+		
+		@sprite .sliderbar {
+			position: absolute;
+			gwt-image: "slidebg";
+			background-position: 0px 6px;
+			width: 3000px;
+			height: 30px;
+			cursor: pointer;
+		}
+		
+		.slideYear {
+			position: relative;
+			height: 23px;
+			float: left;
+			border: 0px solid #BEBEBE;
+			border-left-width: 1px;
+			top: 3px;
+			font-size: .6em;
+			font-family: verdana;
+			font-weight: bold;
+			color: #888888;
+		}
+		
+		.slideMonth {
+			height: 16px;
+			border: 0px solid #BEBEBE;
+			border-left-width: 1px;
+			position: absolute;
+			float: left;
+			top: 7px;
+			font-size: .7em;
+			font-family: verdana;
+			font-weight: bold;
+		}
+		
+		.firstMonth {
+			border-left-width: 0px;
+		}
+		
+		.leftHandle, .rightHandle {
+			background-color: #1343A0; /*#92ABD4*/
+			position: absolute;
+			top: 0px;
+			width: 5px;
+			cursor: w-resize;
+			height: 27px;
+			display: block;
+			z-index: 2;
+			-moz-border-radius: 3px;
+			-webkit-border-radius: 3px;
+			border-radius: 3px;
+		}
+		
+		.shiftpanel {
+			top: 4px;
+			position: absolute;
+			height: 15px;
+			background-color: #BBC9E4;
+			filter: literal("alpha(opacity = 40)");
+			-moz-opacity: .4;
+			opacity: .4;
+			z-index: 1;
+		}
+		
+		.zoomPanel {
+			width: 92px;
+			position: absolute;
+			height: 12px;
+			background-color: #FFF;
+			right: 0px;
+			top: 0px;
+			opacity: .85;
+			filter: literal("alpha(opacity = 85)");
+			border: 1px solid #EEE;
+			border-width: 0px 0px 1px 1px;
+			font-size: 10px;
+			padding: 2px;
+			padding-top: 0px;
+		}
+		
+		.zoomPanel a.zoom {
+			text-decoration: none;
+			color: #000;
+		}

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE module PUBLIC "-//Google Inc.//DTD Google Web Toolkit 2.4.0//EN" "http://google-web-toolkit.googlecode.com/svn/trunk/distro-source/core/src/gwt-module.dtd">
+<module>
+	<!-- Inherit the core Web Toolkit stuff. -->
+	<inherits name="com.google.gwt.user.User" />
+	<inherits name="com.google.gwt.cell.Cell" />
+	<inherits name="com.google.gwt.activity.Activity" />
+	<inherits name="com.google.gwt.place.Place" />
+	<inherits name="com.google.gwt.i18n.I18N" />
+	<inherits name='com.google.web.bindery.requestfactory.RequestFactory' />
+	<inherits name="com.google.gwt.logging.LoggingDisabled" />
+
+	<!-- Other module inherits -->
+
+	<!-- For use Google Guava in the GWT code source -->
+	<inherits name="com.google.common.collect.Collect" />
+
+	<generate-with class="com.sfeir.common.gwt.rebind.checker.CheckerGenerator">
+		<when-type-is class="com.sfeir.common.gwt.client.utils.Checker" />
+	</generate-with>
+
+	<replace-with class="com.sfeir.common.gwt.client.mvp.ClientFactoryImpl">
+		<when-type-is class="com.sfeir.common.gwt.client.mvp.ClientFactory" />
+	</replace-with>
+
+<!-- 	<generate-with -->
+<!-- 		class="com.sfeir.common.gwt.rebind.viewfactory.ViewFactoryGenerator"> -->
+<!-- 		<when-type-assignable class="com.sfeir.common.gwt.client.mvp.ViewFactory" /> -->
+<!-- 	</generate-with> -->
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.servicefactory.ServiceFactoryGenerator">
+		<when-type-assignable class="com.sfeir.common.gwt.client.mvp.ServiceFactory" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.requestcontextfactory.RequestContextFactoryGenerator">
+		<when-type-assignable class="com.sfeir.common.gwt.client.mvp.RequestContextFactory" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.i18nfactory.I18nFactoryGenerator">
+		<when-type-assignable class="com.sfeir.common.gwt.client.i18n.I18nFactory" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.place.PlaceHistoryMapperGenerator">
+		<when-type-assignable class="com.google.gwt.place.shared.PlaceHistoryMapper" />
+	</generate-with>
+
+<!-- 	<generate-with -->
+<!-- 		class="com.sfeir.common.gwt.rebind.activity.ActivityMapperGenerator"> -->
+<!-- 		<when-type-assignable -->
+<!-- 			class="com.sfeir.common.gwt.client.mvp.AppActivityAbstract" /> -->
+<!-- 	</generate-with> -->
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.tokenizer.TokenizerGenerator">
+		<when-type-assignable class="com.sfeir.common.gwt.client.place.Tokenizer" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.layout.LayoutFilterGenerator">
+		<when-type-assignable
+			class="com.sfeir.common.gwt.client.layout.LayoutActivityManager.LayoutFilter" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.dialogbox.DialogBoxFactoryGenerator">
+		<when-type-assignable
+			class="com.sfeir.common.gwt.client.place.DialogBoxPlaceFactory" />
+	</generate-with>
+
+	<generate-with
+		class="com.sfeir.common.gwt.rebind.mvp.MvpFactoryGenerator">
+		<when-type-assignable
+			class="com.sfeir.common.gwt.client.mvp.MvpFactory" />
+	</generate-with>
+	
+	<replace-with class="com.sfeir.common.gwt.client.mvp.MvpFactoryHandlerDefaultImpl">
+		<when-type-assignable class="com.sfeir.common.gwt.client.mvp.MvpFactoryHandler"/>
+	</replace-with>
+
+	<!-- Property configuration -->
+	<define-configuration-property name="viewfactory.suffixviewimpl"
+		is-multi-valued="false" />
+	<set-configuration-property name="viewfactory.suffixviewimpl"
+		value="Impl" />
+
+	<define-configuration-property name="layout.defaultlayoutplace"
+		is-multi-valued="false" />
+	<set-configuration-property name="layout.defaultlayoutplace"
+		value="com.sfeir.common.gwt.client.layout.LayoutPlace" />
+
+	<define-configuration-property name="checker.searchpackage" is-multi-valued="true" />
+	<set-configuration-property name="checker.searchpackage"
+		value="com.sfeir.common.gwt.client" />
+		
+	<define-configuration-property name="mvpfactory.splitpts" is-multi-valued="true" />
+	
+	<!-- Specify the paths for translatable code -->
+	<source path='client'>
+		<exclude name="**/*Test.java" />
+		<exclude name="**/*Mock.java" />
+	</source>
+	<source path='shared'>
+		<exclude name="**/*Test.java" />
+	</source>
+
+	<extend-property name="locale" values="fr" />
+	<extend-property name="locale" values="en" />
+	<set-property-fallback name="locale" value="fr" />
+
+	<!-- Disable logging -->
+	<!-- Default values for all properties -->
+	<set-property name="gwt.logging.logLevel" value="INFO" />
+	<set-property name="gwt.logging.consoleHandler" value="DISABLED" />
+	<set-property name="gwt.logging.developmentModeHandler"
+		value="DISABLED" />
+	<set-property name="gwt.logging.firebugHandler" value="DISABLED" />
+	<set-property name="gwt.logging.hasWidgetsHandler" value="DISABLED" />
+	<set-property name="gwt.logging.popupHandler" value="DISABLED" />
+	<set-property name="gwt.logging.systemHandler" value="DISABLED" />
+	<set-property name="gwt.logging.simpleRemoteHandler"
+		value="DISABLED" />
+	<set-property name="gwt.logging.enabled" value="FALSE"/> 
+</module>

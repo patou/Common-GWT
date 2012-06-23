@@ -1,0 +1,20 @@
+.container {
+	width: auto;
+	padding: 0 20px;
+}
+
+.row-fluid {
+	width: 100%;
+}
+
+.row {
+	margin-left: 0;
+}
+
+.row-fluid .span1,.row-fluid .span1,.row-fluid .span2,.row-fluid .span3,.row-fluid .span4,.row-fluid .span5,.row-fluid .span6,.row-fluid .span7,.row-fluid .span8,.row-fluid .span9,.row-fluid .span10,.row-fluid .span11,.row-fluid .span12,.row .span1,.row .span1,.row .span2,.row .span3,.row .span4,.row .span5,.row .span6,.row .span7,.row .span8,.row .span9,.row .span10,.row .span11,.row .span12
+	{
+	float: none;
+	display: block;
+	width: auto;
+	margin: 0;
+}

@@ -1,0 +1,57 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:with field="res" type="com.sfeir.common.gwt.client.dateslider.DateSliderClientBundler"/>
+	<g:HTMLPanel styleName="{res.style.sliderContainer}" ui:field="container">
+		<div class="{res.style.sliderbar}" style="width: 3000px; left: 0px; " ui:field="sliderbar">
+			<!-- <div class="{res.style.slideYear}" style="width:2554px">
+				2007
+				<div class="{res.style.slideMonth} {res.style.firstMonth}" style="width:217px; left:0px"></div>
+				<div class="{res.style.slideMonth}" style="width:196px; left:217px">Feb</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:413px">Mar</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:630px">Apr</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:840px">May</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1057px">Jun</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1267px">Jul</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1484px">Aug</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1701px">Sep</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1911px">Oct</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:2128px">Nov</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:2338px">Dec</div>
+			</div>
+			<div class="{res.style.slideYear}" style="width:2561px">
+				2008
+				<div class="{res.style.slideMonth} {res.style.firstMonth}" style="width:217px; left:0px"></div>
+				<div class="{res.style.slideMonth}" style="width:203px; left:217px">Feb</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:420px">Mar</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:637px">Apr</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:847px">May</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1064px">Jun</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1274px">Jul</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1491px">Aug</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1708px">Sep</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1918px">Oct</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:2135px">Nov</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:2345px">Dec</div>
+			</div>
+			<div class="{res.style.slideYear}" style="width:2554px">
+				2009
+				<div class="{res.style.slideMonth} {res.style.firstMonth}" style="width:217px; left:0px"></div>
+				<div class="{res.style.slideMonth}" style="width:196px; left:217px">Feb</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:413px">Mar</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:630px">Apr</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:840px">May</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1057px">Jun</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1267px">Jul</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1484px">Aug</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:1701px">Sep</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:1911px">Oct</div>
+				<div class="{res.style.slideMonth}" style="width:210px; left:2128px">Nov</div>
+				<div class="{res.style.slideMonth}" style="width:217px; left:2338px">Dec</div>
+			</div> -->
+			<span class="{res.style.leftHandle}" ui:field="lefthandle" style="left:3402px">&nbsp;</span>
+			<span class="{res.style.rightHandle}" ui:field="righthandle" style="left: 3687px; z-index: 1; ">&nbsp;</span>
+			<div class="{res.style.shiftpanel}" ui:field="shiftpanel" style="left: 3402px; width: 284px; "></div>
+		</div>
+	</g:HTMLPanel>
+</ui:UiBinder> 

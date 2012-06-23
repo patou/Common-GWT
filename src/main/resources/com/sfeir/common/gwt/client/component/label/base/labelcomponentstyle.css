@@ -1,0 +1,88 @@
+
+@def mandatory literal("*");
+@def defaultLabelWidth 200px;
+@def defaultLabelHeight auto;
+/* Class du composant LabelComponent */
+
+.label-component {
+	border-bottom-style: dotted;
+	border-bottom-width: thin;
+	border-bottom-color: gray;
+	padding-bottom: 3px;
+	padding-top: 3px;
+}
+
+/* Class du composant dans LabelComponent */
+.field-panel {
+	display: inline-block !important;
+	display: inline;
+	padding-right: 16px;
+	vertical-align: top;
+}
+
+/* Class du composant LabelComponent qui possède une erreur */
+.field-panel-error {
+	background-position: top right;
+	background-image: url(delete.png);
+	background-repeat: no-repeat;
+}
+
+/* Class du label dans un composant LabelComponent */
+.label-panel {
+	display: inline-block !important;
+	display: block;
+	width: 200px;
+	vertical-align: top;
+}
+
+/* Class de l'étoile obligatoire */
+.mandatory-field {
+	color: red;
+}
+
+/* Class du message d'erreur */
+.error-label {
+	color: red;
+}
+
+/* Class du composant LabelComponent qui posséde une erreure */
+.error-field {
+	border-color: red;
+	border-style: solid;
+	border-width: thin;
+}
+
+.lazy-tab-panel {
+	margin: auto;
+	padding: 10px;
+}
+
+.list-radio-box-panel {
+	display: inline-block;
+}
+
+.list-check-box-panel {
+	display: inline-block;
+}
+
+/* Class du composant LabelForm */
+.form-panel-root {
+
+}
+
+/* Class de la liste des champs dans LabelForm */
+.form-panel-components {
+	padding-top: 5px;
+}
+
+/* Class de la liste des boutons d'un LabelForm */
+.form-panel-buttons {
+	padding: 5px;
+	background-color: #D0E4F6;
+	text-align: center;
+}
+
+/* Boutons */
+.form-panel-buttons .gwt-Button {
+	margin: 2px;
+}
