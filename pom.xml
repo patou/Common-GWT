@@ -5,7 +5,7 @@
 	<artifactId>commongwt</artifactId>
 	<version>0.4.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>Librairie des applications communes GWT</description>
+	<description>Librairie des applications communes GWT simplefication du MVP</description>
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
 		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
