@@ -12,6 +12,7 @@ import com.google.common.collect.ImmutableMap.Builder;
 import com.google.gwt.place.shared.Place;
 import com.sfeir.common.gwt.client.place.AbstractPlaceTokenizer;
 import com.sfeir.common.gwt.client.place.PlaceProperty;
+import com.sfeir.common.gwt.client.place.Tokenizer;
 
 public class AbstractPlaceTokenizerTest {
 	public enum MyEnum { ENUM1, ENUM2 };
@@ -27,35 +28,38 @@ public class AbstractPlaceTokenizerTest {
 		AbstractPlaceTokenizer<MyPlace> aPT = new AbstractPlaceTokenizer<MyPlace>() {
 
 			@Override
-			public Map<String, String> getPlaceProperties(MyPlace place) {
-				fail();
-				return ImmutableMap.of("value", place.value, "number", place.number.toString(), "bool", place.bool.toString(), "en", place.en.name());
-			}
-			
-			@Override
 			public MyPlace createPlace() {
 				return new MyPlace();
 			}
 
 			@Override
-			public MyPlace createPlaceWithProperties(Map<String, String> properties) {
-				MyPlace place = new MyPlace();
+			public Class<MyPlace> getPlaceType() {
+				return MyPlace.class;
+			}
+
+			@Override
+			public void initPlaceProperties(MyPlace place, Map<String, String> properties) {
+				fail();
+				properties.putAll(ImmutableMap.of("value", place.value, "number", place.number.toString(), "bool", place.bool.toString(), "en", place.en.name()));
+			}
+
+			@Override
+			public void buildProperties(Map<String, PlaceProperty> properties) {
+				properties.putAll(ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message"), "number", new PlaceProperty(false, false, "number",
+						PropertyType.INTEGER, Integer.class.getName(), "message"), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "message"), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "enum")));
+			}
+
+			@Override
+			public void initPlaceWithProperties(MyPlace place, Map<String, String> properties) {
 				place.value = parseString(properties.get("value"));
 				place.number = parseInteger(properties.get("number"));
 				place.bool = parseBoolean(properties.get("bool"));
 				place.en = parseEnum(properties.get("en"), MyEnum.class);
-				return place;
 			}
 
 			@Override
-			public Map<String, PlaceProperty> getProperties() {
-				return ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message"), "number", new PlaceProperty(false, false, "number",
-						PropertyType.INTEGER, Integer.class.getName(), "message"), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "message"), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "enum"));
-			}
-
-			@Override
-			public Class<MyPlace> getPlaceType() {
-				return MyPlace.class;
+			public Tokenizer<? super MyPlace> getParentTokenizer() {
+				return null;
 			}
 		};
 		// ---------------------- Tests ---------------------------------
@@ -141,6 +145,26 @@ public class AbstractPlaceTokenizerTest {
 			@Override
 			public Class<MyPlace> getPlaceType() {
 				return MyPlace.class;
+			}
+
+			@Override
+			public void initPlaceProperties(MyPlace place, Map<String, String> properties) {
+				
+			}
+
+			@Override
+			public void buildProperties(Map<String, PlaceProperty> properties) {
+				
+			}
+
+			@Override
+			public void initPlaceWithProperties(MyPlace place, Map<String, String> properties) {
+				
+			}
+
+			@Override
+			public Tokenizer<? super MyPlace> getParentTokenizer() {
+				return null;
 			}
 		};
 		MyPlace place = new MyPlace();

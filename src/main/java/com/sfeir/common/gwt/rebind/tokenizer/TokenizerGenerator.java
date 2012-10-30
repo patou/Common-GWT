@@ -9,6 +9,7 @@ import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.UnableToCompleteException;
+import com.google.gwt.core.ext.typeinfo.JClassType;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.user.rebind.ClassSourceFileComposerFactory;
 import com.google.gwt.user.rebind.SourceWriter;
@@ -84,9 +85,9 @@ public class TokenizerGenerator extends Generator {
 
 	private void writeGetPlaceProperties(TokenizerGeneratorContext context, SourceWriter sw) throws UnableToCompleteException {
 		String placeName = context.getPlace().getSimpleSourceName();
-		sw.println("public Map<String, String> getPlaceProperties(%s place) {", placeName);
+		sw.println("public void initPlaceProperties(%s place, Map<String, String> properties) {", placeName);
 		sw.indent();
-		sw.println("Map<String, String> properties = new HashMap<String, String>();");
+		sw.println("if (parent != null) parent.initPlaceProperties(place, properties);");
 		sw.println("%s defaultPlace = createPlace();", placeName);
 		for (PlaceProperty property : context.getPlaceProperties()) {
 			sw.println(String.format("if (mustAddProperty(place.%1$s, defaultPlace.%1$s))", property.getName()));
@@ -94,20 +95,18 @@ public class TokenizerGenerator extends Generator {
 			sw.indentln("properties.put(\"%1$s\", %2$s(place.%1$s));", property.getName(), getToStringFunctionName(property.getType()));
 			// sw.outdent();
 		}
-		sw.println("return properties;");
 		sw.outdent();
 		sw.println("}");
 	}
 
 	private void writeGetProperties(TokenizerGeneratorContext context, SourceWriter sw) throws UnableToCompleteException {
-		sw.println("public Map<String, PlaceProperty> getProperties() {");
+		sw.println("public void buildProperties(Map<String, PlaceProperty> properties) {");
 		sw.indent();
-		sw.println("Map<String, PlaceProperty> properties = new HashMap<String, PlaceProperty>();");
+		sw.println("if (parent != null) parent.buildProperties(properties);");
 		for (PlaceProperty property : context.getPlaceProperties()) {
 			sw.println("properties.put(\"%1$s\", new PlaceProperty(%2$b, %3$b, \"%1$s\", PropertyType.%4$s, \"%5$s\", \"%6$s\"));", property.getName(),
 					property.isRequired(), property.isDefaultToken(), property.getType().name(), property.getTypeName(), property.getMessage());
 		}
-		sw.println("return properties;");
 		sw.outdent();
 		sw.println("}");
 	}
@@ -118,9 +117,9 @@ public class TokenizerGenerator extends Generator {
 		sw.indentln("return GWT.create(%1$s.class);", placeName);
 		sw.println("}");
 		sw.println();
-		sw.println("public %s createPlaceWithProperties(Map<String, String> properties) {", placeName);
+		sw.println("public void initPlaceWithProperties(%s place, Map<String, String> properties) {", placeName);
 		sw.indent();
-		sw.println("%1$s place = createPlace();", placeName);
+		sw.println("if (parent != null) parent.initPlaceWithProperties(place, properties);");
 		sw.println("for (Entry<String,String> property : properties.entrySet()) {");
 		sw.indent();
 		for (PlaceProperty property : context.getPlaceProperties()) {
@@ -133,16 +132,27 @@ public class TokenizerGenerator extends Generator {
 		}
 		sw.outdent();
 		sw.println("}");
-		sw.println("return place;");
 		sw.outdent();
 		sw.println("}");
 	}
 
 	private void writeGetPlaceType(TokenizerGeneratorContext context, SourceWriter sw) throws UnableToCompleteException {
-		String placeName = context.getPlace().getSimpleSourceName();
+		JClassType place = context.getPlace();
+		String placeName = place.getSimpleSourceName();
 		sw.println("public Class<%s> getPlaceType() {", placeName);
 		sw.indentln("return %s.class;", placeName);
 		sw.println("}");
+
+		sw.println("public Tokenizer<? super %s> getParentTokenizer() {", placeName);
+		JClassType superClass = context.getParentPlaceTokenizer();
+		if (superClass == null/* || superClass.getSimpleSourceName().equals(Place.class.getName())*/) {
+			sw.indentln("return null;");
+		}
+		else {
+			sw.indentln("return GWT.create(%s.class);", superClass.getParameterizedQualifiedSourceName());
+		}
+		sw.println("}");
+		
 	}
 
 	private String getParseFunctionName(PropertyType type) {

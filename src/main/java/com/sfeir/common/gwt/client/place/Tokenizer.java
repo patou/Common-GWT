@@ -46,6 +46,16 @@ public interface Tokenizer<P extends Place> extends com.google.gwt.place.shared.
      */
     public Class<P> getPlaceType();
     
+    // Used for Hierarchy of Place Tokenizer
+    
+    public void initPlaceProperties(P place, Map<String, String> properties);
+    
+    public void buildProperties(Map<String, PlaceProperty> properties);
+    
+    public void initPlaceWithProperties(P place, Map<String, String> properties);
+    
+    public Tokenizer<? super P> getParentTokenizer();
+    
     public static enum PropertyType {
 	STRING, INTEGER, LONG, FLOAT, DOUBLE, BOOLEAN, DATE, LISTSTRING, ENUM
     }

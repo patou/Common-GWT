@@ -24,6 +24,8 @@ public abstract class AbstractPlaceTokenizer<P extends Place> implements Tokeniz
 	private static final String FIELD_DELIMITER = ";";
 	private static final String LIST_STRING_DELIMITER = ",";
 	private static final String FIELD_VALUE = "=";
+	//used in generated code
+	protected Tokenizer<? super P> parent = getParentTokenizer();
 
 	@Override
 	public P getPlace(String token) {
@@ -107,6 +109,30 @@ public abstract class AbstractPlaceTokenizer<P extends Place> implements Tokeniz
 		if (value == null || "null".equalsIgnoreCase(value))
 			return null;
 		return value.replace("%61", FIELD_VALUE).replace("%59", FIELD_DELIMITER).replace("%3F", PARAMS_DELIMITER);
+	}
+	
+	@Override
+	public Map<String,String> getPlaceProperties(P place) {
+		Map<String, String> properties = new HashMap<String, String>();
+		initPlaceProperties(place, properties);
+		return properties;
+	}
+	
+	@Override
+	public Map<String, PlaceProperty> getProperties() {
+		Map<String, PlaceProperty> properties = new HashMap<String, PlaceProperty>();
+		buildProperties(properties);
+		return properties;
+	}
+	
+	public P createPlaceWithProperties(Map<String, String> properties) {
+		P place = createPlace();
+		initPlaceWithProperties(place, properties);
+		return place;
+	}
+	
+	protected Tokenizer<? super P> getParent() {
+		return parent;
 	}
 
 	/*----------------------------------------------------------------------------------------------------------------------------------------------------

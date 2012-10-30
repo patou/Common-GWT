@@ -89,6 +89,7 @@ class TokenizerGeneratorContext {
 	final String packageName;
 
 	private final JClassType placeType;
+	private final JClassType tokenizerType;
 
 	TokenizerGeneratorContext(TreeLogger logger, TypeOracle typeOracle, JClassType interfaceType, JClassType placeType, JClassType tokenizerType, String packageName,
 			String implName) {
@@ -96,6 +97,7 @@ class TokenizerGeneratorContext {
 		this.typeOracle = typeOracle;
 		this.interfaceType = interfaceType;
 		this.placeType = placeType;
+		this.tokenizerType = tokenizerType;
 		this.packageName = packageName;
 		this.implName = implName;
 	}
@@ -103,6 +105,22 @@ class TokenizerGeneratorContext {
 	public JClassType getPlace() throws UnableToCompleteException {
 		ensureInitialized();
 		return placeType;
+	}
+	
+	public JClassType getParentPlaceTokenizer() throws UnableToCompleteException {
+		ensureInitialized();
+		JClassType place = getPlace();
+		if (place != null) {
+			JClassType placeParent = place.getSuperclass();
+			if (placeParent != null && !placeParent.equals(this.placeType)) {
+				for (JClassType tokenizer : tokenizerType.getSubtypes()) {
+					JClassType placeTokenizer = findPlaceType(tokenizerType, tokenizer);
+					if (placeParent.equals(placeTokenizer))
+						return tokenizer;
+				}
+			}
+		}
+		return null;
 	}
 
 	private List<PlaceProperty> placeProperties;
