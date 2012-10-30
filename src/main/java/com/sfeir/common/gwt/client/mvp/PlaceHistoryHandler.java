@@ -28,7 +28,6 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
-import com.google.web.bindery.event.shared.SimpleEventBus;
 import com.sfeir.common.gwt.client.events.ReplacePlaceEvent;
 import com.sfeir.common.gwt.client.history.PlaceHistoryMapper;
 
@@ -79,9 +78,10 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 					int posDDot = token.indexOf(':', 1);
 					if (posSlash > 0 && (posSlash < posDDot || posDDot < 0))
 						token = token.replaceFirst("/", ":");
+					int posQuestionMark = token.indexOf('?');
+					if (posQuestionMark > 0 && token.indexOf('&', posQuestionMark) > 0)
+						token = token.substring(0, posQuestionMark) + token.substring(posQuestionMark + 1).replace('&', ';');
 				}
-				if (token == null)
-					token = "";
 			}
 			return token;
 		}
@@ -109,7 +109,16 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 
 		@Override
 		public com.google.gwt.event.shared.HandlerRegistration addValueChangeHandler(ValueChangeHandler<String> valueChangeHandler) {
-			return this.handlers.addHandler(ValueChangeEvent.getType(), valueChangeHandler);
+			final com.google.gwt.event.shared.HandlerRegistration historyHandler = History.addValueChangeHandler(valueChangeHandler);
+			final com.google.gwt.event.shared.HandlerRegistration html5Handler = this.handlers.addHandler(ValueChangeEvent.getType(), valueChangeHandler);
+			return new com.google.gwt.event.shared.HandlerRegistration() {
+				
+				@Override
+				public void removeHandler() {
+					historyHandler.removeHandler();
+					html5Handler.removeHandler();
+				}
+			};
 		}
 
 		@Override
@@ -126,8 +135,14 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 				newUri = newUri.substring(1);
 			if (!newUri.startsWith("/"))
 				newUri = "/" + newUri;
-			//TODO replace ; by & in parameters
-			//TODO dev GWT parameter
+			int posQuestionMark = newUri.indexOf('?');
+			if (posQuestionMark > 0 && newUri.indexOf(';', posQuestionMark) > 0)
+				newUri = newUri.substring(0, posQuestionMark) + newUri.substring(posQuestionMark + 1).replace(';', '&');
+			if (!GWT.isProdMode()) { //GWT parameters
+				String gwtcodesvr = Window.Location.getParameter("gwt.codesvr");
+				if (gwtcodesvr != null)
+					newUri += ((posQuestionMark > 0) ? "&" : "?") + "gwt.codesvr=" + gwtcodesvr;
+			}
 			pushState(newUri);
 			if (issueEvent) {
 				ValueChangeEvent.fire(this, getToken());
