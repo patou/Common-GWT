@@ -21,6 +21,7 @@ public abstract class ActivityPresenter<P extends Place> extends AbstractActivit
 	ClientFactory clientFactory;
 	P place;
 	private boolean isLive = true;
+	private boolean isTop = true;
 
 	/**
 	 * Get the global ClientFactory
@@ -96,6 +97,18 @@ public abstract class ActivityPresenter<P extends Place> extends AbstractActivit
 	 */
 	public boolean isLive() {
 		return isLive;
+	}
+	
+	/**
+	 * Return false if the activity is a subactivity of an other activity (in activity group, with the attachActivity)
+	 * @return
+	 */
+	public boolean isTop() {
+		return isTop;
+	}
+	
+	void setTop(boolean isTop) {
+		this.isTop = isTop;
 	}
 
 	/**
