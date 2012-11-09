@@ -22,6 +22,7 @@ import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
+import com.google.gwt.http.client.URL;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceChangeEvent;
 import com.google.gwt.user.client.History;
@@ -70,7 +71,7 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 			if (token.isEmpty()) {
 				token = Window.Location.getParameter("token");
 				if (token == null) {
-					String path = Window.Location.getPath();
+					String path = URL.decode(Window.Location.getPath());
 					if (path != null && !path.isEmpty() && path.startsWith("/")) {
 						token = path.substring(1);
 					}
