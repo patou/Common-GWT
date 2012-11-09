@@ -82,6 +82,11 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 					int posQuestionMark = token.indexOf('?');
 					if (posQuestionMark > 0 && token.indexOf('&', posQuestionMark) > 0)
 						token = token.substring(0, posQuestionMark) + token.substring(posQuestionMark + 1).replace('&', ';');
+					//TODO for EgliseInfo, remove this
+					if (token.contains(".gwt"))
+						token = token.replace(".gwt", "");
+					if (token.contains(".html"))
+						token = token.replace(".html", "");
 				}
 			}
 			return token;
