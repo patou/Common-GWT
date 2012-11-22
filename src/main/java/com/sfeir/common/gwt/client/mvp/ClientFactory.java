@@ -10,6 +10,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
+import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
 
 /**
  * This Interface allow to access all MVP elements.
@@ -63,6 +64,14 @@ public interface ClientFactory {
      * @return
      */
     public void handleHistory(Place defaultPlace);
+    /**
+     * HandleHistory,
+     * Create the PlaceHistoryHandler, register the PlaceControler, the EventBus and the defaultPlace, and call the handlerHistory
+     * @param defaultPlace
+     * @param historian The Historian to use with the PlaceHistoryHandler
+     * @return
+     */
+    public void handleHistory(Place defaultPlace, Historian historian);
     
     /**
      * Create the ActivityLayoutManager
@@ -173,4 +182,5 @@ public interface ClientFactory {
     public enum StorageData {
     	PAGE, SESSION, LOCALE
     }
+
 }

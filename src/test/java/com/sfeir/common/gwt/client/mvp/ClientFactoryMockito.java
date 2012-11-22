@@ -15,6 +15,7 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
+import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
 
 /**
  * Class helper simplifiant l'utilisation du ClientFactory avec le framework de mock EasyMock
@@ -248,6 +249,11 @@ public class ClientFactoryMockito implements ClientFactory {
 
 	@Override
 	public void handleHistory(Place defaultPlace) {
+		
+	}
+	
+	@Override
+	public void handleHistory(Place defaultPlace, Historian historian) {
 		
 	}
 

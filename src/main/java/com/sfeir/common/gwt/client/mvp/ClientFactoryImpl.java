@@ -26,6 +26,7 @@ import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.sfeir.common.gwt.client.events.UserLoggedEvent;
 import com.sfeir.common.gwt.client.i18n.I18nFactory;
 import com.sfeir.common.gwt.client.layout.LayoutActivityManager;
+import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
 import com.sfeir.common.gwt.client.utils.Checker;
 
 /**
@@ -80,7 +81,11 @@ public class ClientFactoryImpl implements ClientFactory {
 	
 	@Override
 	public void handleHistory(Place defaultPlace) {
-		PlaceHistoryHandler historyHandler = new PlaceHistoryHandler(placeHistoryMapper);
+		handleHistory(defaultPlace, null);
+	}
+	@Override
+	public void handleHistory(Place defaultPlace, Historian historian) {
+		PlaceHistoryHandler historyHandler = (historian == null) ? new PlaceHistoryHandler(placeHistoryMapper) : new PlaceHistoryHandler(placeHistoryMapper, historian);
 		historyHandler.register(placeController, eventBus, defaultPlace);
 		historyHandler.handleCurrentHistory();
 	}
