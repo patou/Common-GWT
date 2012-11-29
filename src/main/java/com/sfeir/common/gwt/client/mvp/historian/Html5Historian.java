@@ -2,14 +2,12 @@ package com.sfeir.common.gwt.client.mvp.historian;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
 
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.event.shared.GwtEvent;
 import com.google.gwt.event.shared.HandlerManager;
 import com.google.gwt.user.client.History;
-import com.google.gwt.user.client.Window;
 
 public class Html5Historian extends ParameterHistorian implements
 // allows the use of ValueChangeEvent.fire()
@@ -37,10 +35,10 @@ public class Html5Historian extends ParameterHistorian implements
 
 	@Override
 	public void newItem(String token, boolean issueEvent) {
-		if (getToken().equals(token)) { // not sure if this is needed, but just in case
+		String newUri = getTokenPath(token);
+		if (getToken().equals(newUri)) { // not sure if this is needed, but just in case
 			return;
 		}
-		String newUri = getTokenPath(token);
 		pushState(newUri);
 		if (issueEvent) {
 			ValueChangeEvent.fire(this, getToken());
