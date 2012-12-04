@@ -2,7 +2,6 @@ package com.sfeir.common.gwt.client.mvp.historian;
 
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
-import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
 
 /**

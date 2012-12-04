@@ -6,6 +6,7 @@ import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.Window;
 
 public class ParameterHistorian extends DefaultHistorian {
+	HistorianTokenFormater formater = GWT.create(HistorianTokenFormater.class);
 	@Override
 	public String getToken() {
 		String token = History.getToken();
@@ -13,30 +14,10 @@ public class ParameterHistorian extends DefaultHistorian {
 			token = Window.Location.getParameter("token");
 			if (token == null) {
 				String path = URL.decode(Window.Location.getPath());
-				token = cleanTokenPath(path);
+				token = formater.cleanTokenPath(path);
 			}
 		}
+		GWT.log("ParameterHistorian.getToken() " + token);
 		return token;
-	}
-
-	protected String cleanTokenPath(String path) {
-		String token = "";
-		if (path != null && !path.isEmpty() && path.startsWith("/")) {
-			token = path.substring(1);
-		}
-		return token;
-	}
-
-	protected String getTokenPath(String token) {
-		String newUri = token;
-		if (!newUri.startsWith("/"))
-			newUri = "/" + newUri;
-		int posQuestionMark = newUri.indexOf('?');
-		if (!GWT.isProdMode()) { //GWT parameters
-			String gwtcodesvr = Window.Location.getParameter("gwt.codesvr");
-			if (gwtcodesvr != null)
-				newUri += ((posQuestionMark > 0) ? "&" : "?") + "gwt.codesvr=" + gwtcodesvr;
-		}
-		return newUri;
 	}
 }
