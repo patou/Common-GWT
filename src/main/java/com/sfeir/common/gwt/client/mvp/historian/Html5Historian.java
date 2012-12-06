@@ -41,9 +41,9 @@ public class Html5Historian extends ParameterHistorian implements
 		if (currentToken.equals(newUri)) { // not sure if this is needed, but just in case
 			return;
 		}
+		currentToken = token;
 		pushState(token, newUri);
 		GWT.log("newItem " + token + " " + newUri);
-		currentToken = token;
 		if (issueEvent) {
 			ValueChangeEvent.fire(this, currentToken);
 		}
@@ -74,7 +74,7 @@ public class Html5Historian extends ParameterHistorian implements
 		if (isNullOrEmpty(historyToken)) {
 			historyToken = getToken();
 		}
-		GWT.log("onPopState" + historyToken);
+		GWT.log("onPopState " + historyToken);
 		if (!currentToken.equals(historyToken)) {
 			ValueChangeEvent.fire(this, historyToken);
 			currentToken = historyToken;
@@ -98,9 +98,9 @@ public class Html5Historian extends ParameterHistorian implements
 	@Override
 	public void replaceToken(String token, boolean issueEvent) {
 		String newUri = getTokenPath(token);
+		currentToken = token;
 		replaceState(token, newUri);
 		GWT.log("replaceToken " + token + " " + newUri);
-		currentToken = token;
 		if (issueEvent) {
 			ValueChangeEvent.fire(this, currentToken);
 		}
