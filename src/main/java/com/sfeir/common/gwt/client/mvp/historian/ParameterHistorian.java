@@ -26,7 +26,7 @@ public class ParameterHistorian extends DefaultHistorian {
 	private String getUrl() {
 		String path = Window.Location.getPath();
 		String query = Window.Location.getQueryString();
-		if (isNullOrEmpty(query))
+		if (!isNullOrEmpty(query))
 			path += "?" + query;
 		return path;
 	}
