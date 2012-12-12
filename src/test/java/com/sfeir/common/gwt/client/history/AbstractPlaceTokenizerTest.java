@@ -45,8 +45,8 @@ public class AbstractPlaceTokenizerTest {
 
 			@Override
 			public void buildProperties(Map<String, PlaceProperty> properties) {
-				properties.putAll(ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message"), "number", new PlaceProperty(false, false, "number",
-						PropertyType.INTEGER, Integer.class.getName(), "message"), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "message"), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "enum")));
+				properties.putAll(ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message", "value"), "number", new PlaceProperty(false, false, "number",
+						PropertyType.INTEGER, Integer.class.getName(), "message", ""), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "", ""), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "", "")));
 			}
 
 			@Override
@@ -138,8 +138,8 @@ public class AbstractPlaceTokenizerTest {
 
 			@Override
 			public Map<String, PlaceProperty> getProperties() {
-				return ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message"), "number", new PlaceProperty(false, false, "number",
-						PropertyType.INTEGER, Integer.class.getName(), "message"), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "message"), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "enum"));
+				return ImmutableMap.of("value", new PlaceProperty(true, true, "value", PropertyType.STRING, String.class.getName(), "message", ""), "number", new PlaceProperty(false, false, "number",
+						PropertyType.INTEGER, Integer.class.getName(), "message", ""), "bool", new PlaceProperty(false, false, "bool", PropertyType.BOOLEAN, Boolean.class.getName(), "message", ""), "en", new PlaceProperty(false, false, "en", PropertyType.ENUM, MyEnum.class.getName(), "enum", ""));
 			}
 
 			@Override

@@ -25,4 +25,9 @@ public @interface Property {
 	 * @return
 	 */
 	boolean defaultToken() default false;
+	
+	/**
+	 * Alias
+	 */
+	String alias() default "";
 }

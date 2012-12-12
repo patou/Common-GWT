@@ -1,5 +1,7 @@
 package com.sfeir.common.gwt.rebind.tokenizer;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import java.io.PrintWriter;
 import java.util.HashMap;
 import java.util.Map;
@@ -104,8 +106,8 @@ public class TokenizerGenerator extends Generator {
 		sw.indent();
 		sw.println("if (parent != null) parent.buildProperties(properties);");
 		for (PlaceProperty property : context.getPlaceProperties()) {
-			sw.println("properties.put(\"%1$s\", new PlaceProperty(%2$b, %3$b, \"%1$s\", PropertyType.%4$s, \"%5$s\", \"%6$s\"));", property.getName(),
-					property.isRequired(), property.isDefaultToken(), property.getType().name(), property.getTypeName(), property.getMessage());
+			sw.println("properties.put(\"%1$s\", new PlaceProperty(%2$b, %3$b, \"%1$s\", PropertyType.%4$s, \"%5$s\", \"%6$s\", \"%7$s\"));", property.getName(),
+					property.isRequired(), property.isDefaultToken(), property.getType().name(), property.getTypeName(), property.getMessage(), property.getAlias());
 		}
 		sw.outdent();
 		sw.println("}");
@@ -123,7 +125,12 @@ public class TokenizerGenerator extends Generator {
 		sw.println("for (Entry<String,String> property : properties.entrySet()) {");
 		sw.indent();
 		for (PlaceProperty property : context.getPlaceProperties()) {
-			sw.println("if (property.getKey().equals(\"%1$s\"))", property.getName());
+			if (isNullOrEmpty(property.getAlias())) {
+				sw.println("if (property.getKey().equalsIgnoreCase(\"%1$s\"))", property.getName());
+			}
+			else {
+				sw.println("if (property.getKey().equalsIgnoreCase(\"%1$s\") || property.getKey().equalsIgnoreCase(\"%2$s\"))", property.getName(), property.getAlias());
+			}
 			if (property.getType() == PropertyType.ENUM) {
 				sw.indentln("place.%1$s = parseEnum(property.getValue(), %2$s.class);", property.getName(), property.getTypeName());
 			}

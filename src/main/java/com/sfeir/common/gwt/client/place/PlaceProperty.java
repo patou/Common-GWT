@@ -9,8 +9,9 @@ public class PlaceProperty {
 	PropertyType type;
 	String typeName;
 	String message;
+	String alias;
 
-	public PlaceProperty(Boolean required, Boolean defaultToken, String name, PropertyType type, String typeName, String message) {
+	public PlaceProperty(Boolean required, Boolean defaultToken, String name, PropertyType type, String typeName, String message, String alias) {
 		super();
 		this.required = required;
 		this.defaultToken = defaultToken;
@@ -18,6 +19,7 @@ public class PlaceProperty {
 		this.typeName = typeName;
 		this.type = type;
 		this.message = message;
+		this.alias = alias;
 	}
 
 	/**
@@ -71,6 +73,10 @@ public class PlaceProperty {
 	 */
 	public Boolean isDefaultToken() {
 		return defaultToken;
+	}
+	
+	public String getAlias() {
+		return alias;
 	}
 	
 }

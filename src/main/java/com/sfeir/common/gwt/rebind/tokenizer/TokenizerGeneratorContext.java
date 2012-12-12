@@ -156,6 +156,7 @@ class TokenizerGeneratorContext {
 			boolean required = false;
 			boolean defaultToken = false;
 			String message = "";
+			String alias = "";
 			if (annotation != null) {
 				required = annotation.required();
 				if (annotation.defaultToken()) {
@@ -168,8 +169,9 @@ class TokenizerGeneratorContext {
 					defaultTokenField = field.getName();
 				}
 				message = annotation.value();
+				alias = annotation.alias();
 			}
-			PlaceProperty property = new PlaceProperty(required, defaultToken, field.getName(), fieldType, field.getType().getQualifiedSourceName(), message);
+			PlaceProperty property = new PlaceProperty(required, defaultToken, field.getName(), fieldType, field.getType().getQualifiedSourceName(), message, alias);
 			logger.log(TreeLogger.TRACE, String.format("%s.%s<%s>", placeType.getName(), field.getName(), fieldType.name()));
 			placeProperties.add(property);
 		}
