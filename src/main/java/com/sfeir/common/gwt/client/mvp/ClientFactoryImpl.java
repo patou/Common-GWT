@@ -27,6 +27,7 @@ import com.sfeir.common.gwt.client.events.UserLoggedEvent;
 import com.sfeir.common.gwt.client.i18n.I18nFactory;
 import com.sfeir.common.gwt.client.layout.LayoutActivityManager;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
+import com.sfeir.common.gwt.client.mvp.historian.HistorianTokenFormater;
 import com.sfeir.common.gwt.client.utils.Checker;
 
 /**
@@ -41,6 +42,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	ServiceFactory serviceFactory = GWT.create(ServiceFactory.class);
 	I18nFactory i18nFactory = GWT.create(I18nFactory.class);
 	MvpFactoryAbstract factories = GWT.create(MvpFactory.class);
+	HistorianTokenFormater historianTokenFormater = GWT.create(HistorianTokenFormater.class);
 	RequestContextFactory requestContextFactory = GWT.create(RequestContextFactory.class);
 	Map<Class<?>, View> views = new HashMap<Class<?>, View>();
 	Map<Class<? extends LocalizableResource>, LocalizableResource> messages = newHashMap();
@@ -88,6 +90,14 @@ public class ClientFactoryImpl implements ClientFactory {
 		PlaceHistoryHandler historyHandler = (historian == null) ? new PlaceHistoryHandler(placeHistoryMapper) : new PlaceHistoryHandler(placeHistoryMapper, historian);
 		historyHandler.register(placeController, eventBus, defaultPlace);
 		historyHandler.handleCurrentHistory();
+	}
+	
+	@Override
+	public HistorianTokenFormater getHistorianTokenFormater() {
+		if (historianTokenFormater == null) {
+			historianTokenFormater = GWT.create(HistorianTokenFormater.class);
+		}
+		return historianTokenFormater;
 	}
 	
 	@Override

@@ -19,6 +19,7 @@ import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
+import com.sfeir.common.gwt.client.mvp.historian.HistorianTokenFormater;
 
 /**
  * Class helper simplifiant l'utilisation du ClientFactory avec le framework de mock EasyMock
@@ -31,6 +32,7 @@ public class ClientFactoryEasyMock implements ClientFactory {
 	PlaceController placeController = createNiceMock(PlaceController.class);
 	ActivityMapper activityMapper = createNiceMock(ActivityMapper.class);
 	AppPlaceHistoryMapper appPlaceHistoryMapper = createNiceMock(AppPlaceHistoryMapper.class);
+	HistorianTokenFormater historianTokenFormater = createNiceMock(HistorianTokenFormater.class);
 	Map<Class<?>, View> views = newHashMap();
 	Map<Class<?>, Object> services = newHashMap();
 	Map<Class<?>, LocalizableResource> localizable = newHashMap();
@@ -339,6 +341,11 @@ public class ClientFactoryEasyMock implements ClientFactory {
 	@Override
 	public void getActivity(Place place, AsyncCallback<Activity> callback) {
 		
+	}
+
+	@Override
+	public HistorianTokenFormater getHistorianTokenFormater() {
+		return historianTokenFormater;
 	}
 
 }

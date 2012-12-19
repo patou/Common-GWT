@@ -16,6 +16,7 @@ import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
+import com.sfeir.common.gwt.client.mvp.historian.HistorianTokenFormater;
 
 /**
  * Class helper simplifiant l'utilisation du ClientFactory avec le framework de mock EasyMock
@@ -34,6 +35,7 @@ public class ClientFactoryMockito implements ClientFactory {
 	Map<Class<?>, RequestContext> requests = newHashMap();
 	Map<String, Object> datas = newHashMap();
 	Object userdata;
+	HistorianTokenFormater historianTokenFormater = mock(HistorianTokenFormater.class);
 
 	@Override
 	public EventBus getEventBus() {
@@ -280,6 +282,12 @@ public class ClientFactoryMockito implements ClientFactory {
 	@Override
 	public void getActivity(Place place, AsyncCallback<Activity> callback) {
 		
+	}
+	
+
+	@Override
+	public HistorianTokenFormater getHistorianTokenFormater() {
+		return historianTokenFormater;
 	}
 
 }

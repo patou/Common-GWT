@@ -11,6 +11,7 @@ import com.google.web.bindery.requestfactory.shared.RequestContext;
 import com.google.web.bindery.requestfactory.shared.RequestFactory;
 import com.google.web.bindery.requestfactory.shared.RequestTransport;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
+import com.sfeir.common.gwt.client.mvp.historian.HistorianTokenFormater;
 
 /**
  * This Interface allow to access all MVP elements.
@@ -72,6 +73,12 @@ public interface ClientFactory {
      * @return
      */
     public void handleHistory(Place defaultPlace, Historian historian);
+    
+    /**
+     * Return the HistorianTokenFormater
+     * @return
+     */
+    public HistorianTokenFormater getHistorianTokenFormater();
     
     /**
      * Create the ActivityLayoutManager

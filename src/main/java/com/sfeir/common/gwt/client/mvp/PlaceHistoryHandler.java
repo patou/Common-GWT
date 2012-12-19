@@ -26,7 +26,6 @@ import com.google.web.bindery.event.shared.EventBus;
 import com.google.web.bindery.event.shared.HandlerRegistration;
 import com.sfeir.common.gwt.client.events.ReplacePlaceEvent;
 import com.sfeir.common.gwt.client.history.PlaceHistoryMapper;
-import com.sfeir.common.gwt.client.mvp.historian.ParameterHistorian;
 
 /**
  * Monitors {@link PlaceChangeEvent}s and {@link com.google.gwt.user.client.History} events and keep them in sync.
@@ -127,6 +126,10 @@ public class PlaceHistoryHandler extends com.google.gwt.place.shared.PlaceHistor
 	 */
 	public void handleCurrentHistory() {
 		handleHistoryToken(historian.getToken());
+	}
+	
+	public Historian getHistorian() {
+		return historian;
 	}
 
 	private void handleHistoryToken(String token) {

@@ -4,7 +4,7 @@ import com.google.gwt.core.client.GWT;
 import com.google.gwt.user.client.Window;
 
 public class HistorianTokenFormater {
-	protected String cleanTokenPath(String path) {
+	public String cleanTokenPath(String path) {
 		String token = "";
 		if (path != null && !path.isEmpty() && path.startsWith("/")) {
 			token = path.substring(1);
@@ -15,7 +15,7 @@ public class HistorianTokenFormater {
 		return token;
 	}
 
-	protected String getTokenPath(String token) {
+	public String getTokenPath(String token) {
 		String newUri = token;
 		if (!newUri.startsWith("/"))
 			newUri = "/" + newUri;
