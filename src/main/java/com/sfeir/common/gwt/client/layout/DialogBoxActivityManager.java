@@ -6,9 +6,9 @@ import com.google.gwt.activity.shared.FilteredActivityMapper;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 import com.google.gwt.place.shared.PlaceChangeEvent;
-import com.google.gwt.user.client.ui.DialogBox;
 import com.google.gwt.user.client.ui.IsWidget;
 import com.google.web.bindery.event.shared.EventBus;
+import com.sfeir.common.gwt.client.component.dialogbox.ClosableDialogBox;
 import com.sfeir.common.gwt.client.events.SetTitleEvent;
 import com.sfeir.common.gwt.client.mvp.CachingActivityMapper;
 import com.sfeir.common.gwt.client.place.DialogBoxPlace;
@@ -63,7 +63,7 @@ public class DialogBoxActivityManager extends ActivityManager implements SetTitl
 		}
 	}
 
-	class DialogBoxDisplay extends DialogBox {
+	class DialogBoxDisplay extends ClosableDialogBox {
 		@Override
 		public void setWidget(IsWidget w) {
 			super.setWidget(w);
