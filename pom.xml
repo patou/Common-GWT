@@ -5,7 +5,7 @@
 	<artifactId>commongwt</artifactId>
 	<version>0.4.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>Librairie communes d applications GWT simplefication du MVP, </description>
+	<description>Librairie communes d applications GWT simplification du MVP, </description>
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
 		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
@@ -184,29 +184,6 @@
 	</build>
 
 	<profiles>
-		<profile>
-			<id>dev</id>
-			<activation>
-				<property>
-					<name>env</name>
-					<value>dev</value>
-				</property>
-			</activation>
-			<build>
-				<plugins>
-					<plugin>
-						<groupId>org.codehaus.mojo</groupId>
-						<artifactId>gwt-maven-plugin</artifactId>
-						<configuration>
-							<modules>
-								<module>com.cacf.protopixgwt.ProtopixgwtDev</module>
-							</modules>
-							<draftCompile>true</draftCompile>
-						</configuration>
-					</plugin>
-				</plugins>
-			</build>
-		</profile>
 		<!-- Active GWT TESTS -->
 		<profile>
 			<id>gwt-test</id>

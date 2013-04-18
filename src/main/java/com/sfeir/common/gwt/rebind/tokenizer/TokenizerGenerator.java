@@ -187,12 +187,13 @@ public class TokenizerGenerator extends Generator {
 	}
 
 	private String getToStringFunctionName(PropertyType type) {
-		switch (type) {
-		case DATE:
-			return "toStringDate";
-		case LISTSTRING:
-			return "toStringListString";
-		}
-		return "toString";
+        switch (type) {
+            case DATE:
+                return "toStringDate";
+            case LISTSTRING:
+                return "toStringListString";
+            default:
+                return "toString";
+        }
 	}
 }

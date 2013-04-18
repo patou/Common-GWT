@@ -57,6 +57,6 @@ public interface Tokenizer<P extends Place> extends com.google.gwt.place.shared.
     public Tokenizer<? super P> getParentTokenizer();
     
     public static enum PropertyType {
-	STRING, INTEGER, LONG, FLOAT, DOUBLE, BOOLEAN, DATE, LISTSTRING, ENUM
+        STRING, INTEGER, LONG, FLOAT, DOUBLE, BOOLEAN, DATE, LISTSTRING, ENUM
     }
 }
