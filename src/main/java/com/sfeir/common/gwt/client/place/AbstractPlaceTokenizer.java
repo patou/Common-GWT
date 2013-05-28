@@ -73,6 +73,17 @@ public abstract class AbstractPlaceTokenizer<P extends Place> implements Tokeniz
 				}
 			}
 		}
+		if (place instanceof ParametersPlace) {
+            Map<String, String> parameters = ((ParametersPlace) place).getParameters();
+            for (Entry<String, String> param : parameters.entrySet()) {
+                if (placeProperties.get(param.getKey()) == null) {
+                    sb.append(FIELD_DELIMITER);
+                    sb.append(param.getKey());
+                    sb.append(FIELD_VALUE);
+                    sb.append(escapeString(param.getValue()));
+                }
+            }
+        }
 		if (defaultToken != null) {
 			if (sb.length() > 0)
 				sb.replace(0, 1, PARAMS_DELIMITER);
@@ -128,6 +139,9 @@ public abstract class AbstractPlaceTokenizer<P extends Place> implements Tokeniz
 	public P createPlaceWithProperties(Map<String, String> properties) {
 		P place = createPlace();
 		initPlaceWithProperties(place, properties);
+		if (place instanceof ParametersPlace) {
+		    ((ParametersPlace) place).setParameters(properties);
+		}
 		return place;
 	}
 	

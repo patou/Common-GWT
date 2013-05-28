@@ -49,6 +49,7 @@ public class ClientFactoryImpl implements ClientFactory {
 	Map<Class<? extends RemoteService>, Object> services = newHashMap();
 	Map<String,Object> pageStorage = newHashMap();
 	Object userdata;
+	HistoryPlaces historyPlaces = new HistoryPlaces(eventBus, placeController);
 
 	public ClientFactoryImpl() {
 		activityMapper.setClientFactory(this, factories);
@@ -260,5 +261,10 @@ public class ClientFactoryImpl implements ClientFactory {
 	@Override
 	public void getActivity(Place place, AsyncCallback<Activity> callback) {
 		factories.getActivity(place, callback);
+	}
+	
+	@Override
+	public HistoryPlaces getHistoryPlaces() {
+	    return historyPlaces;
 	}
 }

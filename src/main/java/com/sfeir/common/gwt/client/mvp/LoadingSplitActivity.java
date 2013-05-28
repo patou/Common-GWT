@@ -1,8 +1,11 @@
 package com.sfeir.common.gwt.client.mvp;
 
+import static com.google.common.base.Strings.isNullOrEmpty;
+
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.event.shared.EventBus;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.AcceptsOneWidget;
 import com.google.gwt.user.client.ui.Label;
 
@@ -63,6 +66,13 @@ public class LoadingSplitActivity<T extends Place> extends ActivityGroup<T> {
 	}
 	
 	public void setErrorNoActivity(String error) {
-		panel.setWidget(new Label(error));
+	    if (isNullOrEmpty(error))
+	        return;
+	    if (panel != null) {
+	        panel.setWidget(new Label(error));
+	    }
+	    else {
+	        Window.alert(error);
+	    }
 	}
 }

@@ -39,6 +39,7 @@ public class ClientFactoryEasyMock implements ClientFactory {
 	Map<Class<?>, RequestContext> requests = newHashMap();
 	Map<String, Object> datas = newHashMap();
 	Object userdata;
+	HistoryPlaces historyPlaces = createNiceMock(HistoryPlaces.class);
 
 	@Override
 	public EventBus getEventBus() {
@@ -348,4 +349,8 @@ public class ClientFactoryEasyMock implements ClientFactory {
 		return historianTokenFormater;
 	}
 
+	@Override
+    public HistoryPlaces getHistoryPlaces() {
+        return historyPlaces;
+    }
 }

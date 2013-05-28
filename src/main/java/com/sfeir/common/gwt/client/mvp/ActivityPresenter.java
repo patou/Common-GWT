@@ -20,8 +20,15 @@ import com.sfeir.common.gwt.client.events.SetTitleEvent;
 public abstract class ActivityPresenter<P extends Place> extends AbstractActivity {
 	ClientFactory clientFactory;
 	P place;
+	Place oldPlace;
 	private boolean isLive = true;
 	private boolean isTop = true;
+	
+	public ActivityPresenter() {
+    }
+	
+	public ActivityPresenter(P place) {
+    }
 
 	/**
 	 * Get the global ClientFactory
@@ -142,5 +149,13 @@ public abstract class ActivityPresenter<P extends Place> extends AbstractActivit
 	public void onCancel() {
 		super.onCancel();
 		this.isLive = false;
+	}
+	
+	public void setOldPlace(Place oldPlace) {
+        this.oldPlace = oldPlace;
+    }
+	
+	protected void returnLastPlace() {
+	    goTo(oldPlace);
 	}
 }

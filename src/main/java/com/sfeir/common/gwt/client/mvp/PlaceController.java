@@ -122,7 +122,12 @@ public class PlaceController extends com.google.gwt.place.shared.PlaceController
       eventBus.fireEvent(new ReplacePlaceEvent(newPlace));
   }
 
-  private String maybeGoTo(Place newPlace) {
+  /**
+   * 
+   * @param newPlace The new place you want to goto
+   * @return null if there are no problems to go to the new Place or the message instead
+   */
+  public String maybeGoTo(Place newPlace) {
     PlaceChangeRequestEvent willChange = new PlaceChangeRequestEvent(newPlace);
     eventBus.fireEvent(willChange);
     String warning = willChange.getWarning();

@@ -190,4 +190,5 @@ public interface ClientFactory {
     	PAGE, SESSION, LOCALE
     }
 
+    public HistoryPlaces getHistoryPlaces();
 }

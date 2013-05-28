@@ -36,6 +36,7 @@ public class ClientFactoryMockito implements ClientFactory {
 	Map<String, Object> datas = newHashMap();
 	Object userdata;
 	HistorianTokenFormater historianTokenFormater = mock(HistorianTokenFormater.class);
+	HistoryPlaces historyPlaces = mock(HistoryPlaces.class);
 
 	@Override
 	public EventBus getEventBus() {
@@ -290,4 +291,8 @@ public class ClientFactoryMockito implements ClientFactory {
 		return historianTokenFormater;
 	}
 
+	@Override
+    public HistoryPlaces getHistoryPlaces() {
+        return historyPlaces;
+    }
 }

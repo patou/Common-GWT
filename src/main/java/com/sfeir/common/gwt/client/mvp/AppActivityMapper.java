@@ -34,9 +34,10 @@ public class AppActivityMapper implements ActivityMapper {
 			// inject the ClientFactory and the Place
 			if (lastActivity != null
 					&& lastActivity instanceof ActivityPresenter<?>) {
-				((ActivityPresenter<?>) lastActivity)
-						.setClientFactory(clientFactory);
-				((ActivityPresenter<Place>) lastActivity).setPlace(place);
+			    ActivityPresenter<Place> activityPresenter = (ActivityPresenter<Place>) lastActivity;
+			    activityPresenter.setClientFactory(clientFactory);
+                activityPresenter.setPlace(place);
+                activityPresenter.setOldPlace(lastPlace);
 			}
 			else {
 				GWT.log("There are no activity for the corresponding place '"+ place.getClass().getName() + "'");
