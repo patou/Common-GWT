@@ -5,7 +5,7 @@
 	<artifactId>commongwt</artifactId>
 	<version>0.4.0-SNAPSHOT</version>
 	<packaging>jar</packaging>
-	<description>Librairie communes d applications GWT simplification du MVP, </description>
+	<description>Librairie communes d applications GWT simplification du MVP</description>
 	<properties>
 		<gwt.version>2.4.0</gwt.version>
 		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
@@ -50,12 +50,12 @@
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava</artifactId>
-			<version>10.0</version>
+			<version>14.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.guava</groupId>
 			<artifactId>guava-gwt</artifactId>
-			<version>10.0</version>
+			<version>14.0.1</version>
 			<scope>provided</scope>
 		</dependency>
 		<!-- Dépendences JUnit -->
