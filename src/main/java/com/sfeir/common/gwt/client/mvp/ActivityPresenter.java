@@ -28,6 +28,7 @@ public abstract class ActivityPresenter<P extends Place> extends AbstractActivit
     }
 	
 	public ActivityPresenter(P place) {
+	    this.place = place;
     }
 
 	/**
