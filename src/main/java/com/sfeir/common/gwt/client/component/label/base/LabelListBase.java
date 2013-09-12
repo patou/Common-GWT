@@ -39,7 +39,7 @@ public abstract class LabelListBase<K,T extends Widget,V> extends LabelComponent
         super(config);
     }
     
-    @SuppressWarnings({ "deprecation", "unchecked" })
+    @SuppressWarnings({ "unchecked" })
     @Override
     public void setConfig(Map<String, Object> config) {
         super.setConfig(config);
