@@ -1,6 +1,9 @@
 package com.sfeir.common.gwt.client.mvp.historian;
 
 import static com.google.common.base.Strings.isNullOrEmpty;
+import static com.google.common.collect.Maps.newHashMap;
+
+import java.util.HashMap;
 
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
@@ -16,6 +19,8 @@ public class Html5Historian extends ParameterHistorian implements
 
 	private HandlerManager handlers = new HandlerManager(null);
 	private String currentToken = "";
+	private String lastToken = null;
+	private HashMap<String, String> historyLast = newHashMap();
 
 	public Html5Historian() {
 		initEvent();
@@ -41,6 +46,7 @@ public class Html5Historian extends ParameterHistorian implements
 		if (currentToken.equals(newUri)) { // not sure if this is needed, but just in case
 			return;
 		}
+		lastToken = currentToken;
 		currentToken = token;
 		pushState(token, newUri);
 		GWT.log("newItem " + token + " " + newUri);
@@ -74,10 +80,15 @@ public class Html5Historian extends ParameterHistorian implements
 		if (isNullOrEmpty(historyToken)) {
 			historyToken = getToken();
 		}
+		String hasLast = historyLast.get(historyToken);
+		if (!isNullOrEmpty(hasLast)) {
+		    historyLast.remove(historyToken);
+		    historyToken = hasLast;
+		}
 		GWT.log("onPopState " + historyToken);
 		if (!currentToken.equals(historyToken)) {
+		    currentToken = historyToken;
 			ValueChangeEvent.fire(this, historyToken);
-			currentToken = historyToken;
 		}
 	}
 
@@ -98,6 +109,10 @@ public class Html5Historian extends ParameterHistorian implements
 	@Override
 	public void replaceToken(String token, boolean issueEvent) {
 		String newUri = getTokenPath(token);
+		historyLast.put(currentToken, lastToken);
+		if (currentToken.equals(newUri)) { // not sure if this is needed, but just in case
+            return;
+        }
 		currentToken = token;
 		replaceState(token, newUri);
 		GWT.log("replaceToken " + token + " " + newUri);

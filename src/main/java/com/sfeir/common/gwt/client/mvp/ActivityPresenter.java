@@ -2,6 +2,7 @@ package com.sfeir.common.gwt.client.mvp;
 
 import com.google.gwt.activity.shared.AbstractActivity;
 import com.google.gwt.place.shared.Place;
+import com.google.gwt.user.client.History;
 import com.google.gwt.user.client.rpc.AsyncCallback;
 import com.sfeir.common.gwt.client.events.ErrorMessageEvent;
 import com.sfeir.common.gwt.client.events.LoadingEvent;
@@ -157,6 +158,9 @@ public abstract class ActivityPresenter<P extends Place> extends AbstractActivit
     }
 	
 	protected void returnLastPlace() {
-	    goTo(oldPlace);
+	    if (oldPlace == null)
+	        History.back();
+	    else
+	        goTo(oldPlace);
 	}
 }

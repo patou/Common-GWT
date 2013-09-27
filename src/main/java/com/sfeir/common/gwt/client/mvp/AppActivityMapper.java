@@ -2,7 +2,6 @@ package com.sfeir.common.gwt.client.mvp;
 
 import com.google.gwt.activity.shared.Activity;
 import com.google.gwt.activity.shared.ActivityMapper;
-import com.google.gwt.core.client.GWT;
 import com.google.gwt.place.shared.Place;
 
 /**
@@ -14,8 +13,6 @@ import com.google.gwt.place.shared.Place;
  */
 public class AppActivityMapper implements ActivityMapper {
 	ClientFactory clientFactory;
-	Place lastPlace;
-	Activity lastActivity;
 	private MvpFactory factory;
 
 	void setClientFactory(ClientFactory clientFactory, MvpFactory factory) {
@@ -28,21 +25,15 @@ public class AppActivityMapper implements ActivityMapper {
 	public Activity getActivity(Place place) {
 		if (place == null)
 			return null;
-		if (!place.equals(lastPlace)) {
-			lastActivity = factory.createActivity(place);
+		Activity newActivity = factory.createActivity(place);
 			// If the activity extend the ActivityPresenter, automatically
 			// inject the ClientFactory and the Place
-			if (lastActivity != null
-					&& lastActivity instanceof ActivityPresenter<?>) {
-			    ActivityPresenter<Place> activityPresenter = (ActivityPresenter<Place>) lastActivity;
-			    activityPresenter.setClientFactory(clientFactory);
-                activityPresenter.setPlace(place);
-                activityPresenter.setOldPlace(lastPlace);
-			}
-			else {
-				GWT.log("There are no activity for the corresponding place '"+ place.getClass().getName() + "'");
-			}
-		}
-		return lastActivity;
+		if (newActivity != null
+				&& newActivity instanceof ActivityPresenter<?>) {
+		    ActivityPresenter<Place> activityPresenter = (ActivityPresenter<Place>) newActivity;
+		    activityPresenter.setClientFactory(clientFactory);
+            activityPresenter.setPlace(place);
+		}			
+		return newActivity;
 	}
 }

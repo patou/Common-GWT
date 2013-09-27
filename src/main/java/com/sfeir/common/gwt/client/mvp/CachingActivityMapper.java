@@ -27,8 +27,11 @@ public class CachingActivityMapper implements ActivityMapper {
 	if (place == null)
 		return lastActivity;
     if (!place.equals(lastPlace)) {
-      lastPlace = place;
-      lastActivity = wrapped.getActivity(place);
+        lastActivity = wrapped.getActivity(place);
+        if (lastActivity instanceof ActivityPresenter<?>) {
+            ((ActivityPresenter<?>) lastActivity).setOldPlace(lastPlace);
+        }
+        lastPlace = place;
     }
 
     return lastActivity;

@@ -82,6 +82,7 @@ public abstract class ActivityGroup<P extends Place> extends ActivityPresenter<P
 			activityPresenter.setClientFactory(getClientFactory());
 			if (activityPresenter.getPlace() == null)
 				activityPresenter.setPlace(getPlace());
+			activityPresenter.setOldPlace(oldPlace);
 			activityPresenter.setTop(false);
 		}
 	}
