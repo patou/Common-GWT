@@ -9,8 +9,15 @@ public class ClosableDialogBox extends DialogBox implements ClickHandler {
 	private static DialogBoxCaptionWithCancel caption = new DialogBoxCaptionWithCancel();
 
 	public ClosableDialogBox() {
-		// construct the dialog box with the custom caption
 		super(false, false, caption);
+	}
+	
+	public ClosableDialogBox(Boolean autoHide) {
+	    super(autoHide, true, caption);
+	}
+	
+	public ClosableDialogBox(boolean autoHide, boolean modal) {
+	    super(autoHide, modal, caption);
 	}
 
 	protected void onLoad() {

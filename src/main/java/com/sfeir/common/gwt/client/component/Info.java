@@ -68,6 +68,7 @@ public class Info extends DecoratedPopupPanel implements PositionCallback {
         setAnimationEnabled(true);
         setWidget(new Label(text));
         setPopupPositionAndShow(this);
+        getElement().getStyle().setZIndex(10000000);
     }
     
     private int saveTop;
