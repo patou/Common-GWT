@@ -1,0 +1,71 @@
+<ui:UiBinder xmlns:ui='urn:ui:com.google.gwt.uibinder'
+             xmlns:g='urn:import:com.google.gwt.user.client.ui'
+             xmlns:container='urn:import:com.sencha.gxt.widget.core.client.container'
+             xmlns:comp='urn:import:com.groupemre.socle.ihm.client.ui.components'
+              xmlns:form='urn:import:com.sencha.gxt.widget.core.client.form'>
+    <ui:style>
+      .uploadFileTextField input[type=text] {
+        display: none;
+        width: 0;
+      }
+
+      .downloadAnchor {
+        min-width: 200px;
+      }
+      .drop
+      {
+        /*visibility: hidden;*/
+        width: 450px;
+        height: 38px;
+        color: #000;
+        margin: 10px 0;
+        background: #b5edbc;
+        border: 1px dashed green;
+        padding: 5px;
+        position: relative;
+        text-align: center;
+        z-index: 3;
+        -webkit-border-radius: 3px;
+        -moz-border-radius: 3px;
+        border-radius: 3px;
+        opacity: 0.5;
+      }
+      .drop h1 {
+        font-size: 14px;
+        margin: 2px;
+      }
+      .drop p {
+        font-size: 12px;
+        margin: 0;
+      }
+      .drop input {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+      }
+      .namedFrame {
+        position: absolute;
+        width: 0;
+        height: 0;
+        border: 0;
+      }
+    </ui:style>
+
+      <g:HTMLPanel>
+        <g:Anchor ui:field="download" target="_blank" addStyleNames="{style.downloadAnchor}"></g:Anchor>
+        <comp:Loading visible="false" ui:field="loading">Envoi en cours ...</comp:Loading>
+        <g:FocusPanel styleName="{style.drop}" ui:field="dropZone">
+          <g:HTMLPanel>
+            <h1>Déposer un fichier ici</h1>
+            <p>ou cliquez ici pour selectionner un fichier</p>
+            <form:FormPanel ui:field="formDrop" method="POST" encoding="MULTIPART">
+              <g:FileUpload ui:field="uploadDrop" name="file"></g:FileUpload>
+            </form:FormPanel>
+            <g:NamedFrame name="uploadDropFormUpload" width="0" height="0" styleName="{style.namedFrame}"></g:NamedFrame>
+          </g:HTMLPanel>
+        </g:FocusPanel>
+      </g:HTMLPanel>
+</ui:UiBinder>
