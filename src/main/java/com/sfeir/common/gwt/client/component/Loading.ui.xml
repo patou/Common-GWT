@@ -1,0 +1,11 @@
+<!DOCTYPE ui:UiBinder SYSTEM "http://dl.google.com/gwt/DTD/xhtml.ent">
+<ui:UiBinder xmlns:ui="urn:ui:com.google.gwt.uibinder"
+	xmlns:g="urn:import:com.google.gwt.user.client.ui">
+	<ui:image field="loading"></ui:image>
+	<ui:style>
+		
+	</ui:style>
+	<g:HTMLPanel>
+		<g:InlineLabel ui:field="loadingText">Chargement en cours ...</g:InlineLabel> <g:Image resource="{loading}" ui:field="loadingImg"/>
+	</g:HTMLPanel>
+</ui:UiBinder> 
