@@ -3,7 +3,7 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sfeir.common</groupId>
 	<artifactId>commongwt</artifactId>
-	<version>0.4.1</version>
+	<version>0.4.2-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>Librairie communes d applications GWT simplification du MVP</description>
 	<properties>
