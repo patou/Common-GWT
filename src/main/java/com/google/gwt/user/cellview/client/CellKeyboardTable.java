@@ -113,15 +113,7 @@ public class CellKeyboardTable<T> extends CellTable<T> {
 	    HasDataPresenter<T> presenter = getPresenter();
 	    int keyCode = event.getKeyCode();
 	    if (keyCode == KeyCodes.KEY_TAB) {
-		if (presenter.hasKeyboardNext() && !event.getShiftKey()) {
-		    presenter.keyboardNext();
-		    event.preventDefault();
-		    return;
-		} else if (presenter.hasKeyboardPrev() && event.getShiftKey()) {
-		    presenter.keyboardPrev();
-		    event.preventDefault();
-		    return;
-		}
+
 	    }
 	    if (keyCode == KeyCodes.KEY_ENTER) {
 		T object = getPresenter().getKeyboardSelectedRowValue();
