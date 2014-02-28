@@ -44,7 +44,6 @@ public class DialogBoxCaptionWithCancel extends Composite implements Caption, Ha
 
 	public DialogBoxCaptionWithCancel() {
 		initWidget(binder.createAndBindUi(this));
-
 		mainPanel.setStyleName("Caption");
 	}
 
