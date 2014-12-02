@@ -3,11 +3,11 @@
 	<modelVersion>4.0.0</modelVersion>
 	<groupId>com.sfeir.common</groupId>
 	<artifactId>commongwt</artifactId>
-	<version>0.4.3-SNAPSHOT</version>
+	<version>0.4.4-SNAPSHOT</version>
 	<packaging>jar</packaging>
 	<description>Librairie communes d applications GWT simplification du MVP</description>
 	<properties>
-		<gwt.version>2.6.0-rc3</gwt.version>
+		<gwt.version>2.7.0</gwt.version>
 		<maven-surefire-plugin.version>2.10</maven-surefire-plugin.version>
 	</properties>
 
