@@ -23,6 +23,6 @@ public class DefaultHistorian implements Historian {
 	@Override
 	public void replaceToken(String token, boolean issueEvent) {
 		if (!getToken().equals(token))
-			newItem(token, issueEvent);
+            History.replaceItem(token, issueEvent);
 	}
 }
