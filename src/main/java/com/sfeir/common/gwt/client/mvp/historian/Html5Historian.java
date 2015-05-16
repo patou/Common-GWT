@@ -5,6 +5,7 @@ import static com.google.common.collect.Maps.newHashMap;
 
 import java.util.HashMap;
 
+import com.google.common.base.Objects;
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.event.logical.shared.HasValueChangeHandlers;
 import com.google.gwt.event.logical.shared.ValueChangeEvent;
@@ -43,7 +44,7 @@ public class Html5Historian extends ParameterHistorian implements
 	@Override
 	public void newItem(String token, boolean issueEvent) {
 		String newUri = getTokenPath(token);
-		if (currentToken.equals(newUri)) { // not sure if this is needed, but just in case
+		if (currentToken.equals(token)) { // not sure if this is needed, but just in case
 			return;
 		}
 		lastToken = currentToken;
@@ -109,10 +110,10 @@ public class Html5Historian extends ParameterHistorian implements
 	@Override
 	public void replaceToken(String token, boolean issueEvent) {
 		String newUri = getTokenPath(token);
-		historyLast.put(currentToken, lastToken);
-		if (currentToken.equals(newUri)) { // not sure if this is needed, but just in case
+		if (Objects.equal(currentToken, token)) { // not sure if this is needed, but just in case
             return;
         }
+		historyLast.put(currentToken, lastToken);
 		currentToken = token;
 		replaceState(token, newUri);
 		GWT.log("replaceToken " + token + " " + newUri);

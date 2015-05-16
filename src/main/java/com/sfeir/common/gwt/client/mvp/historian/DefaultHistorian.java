@@ -1,5 +1,6 @@
 package com.sfeir.common.gwt.client.mvp.historian;
 
+import com.google.common.base.Objects;
 import com.google.gwt.event.logical.shared.ValueChangeHandler;
 import com.google.gwt.user.client.History;
 import com.sfeir.common.gwt.client.mvp.PlaceHistoryHandler.Historian;
@@ -22,7 +23,7 @@ public class DefaultHistorian implements Historian {
 
 	@Override
 	public void replaceToken(String token, boolean issueEvent) {
-		if (!getToken().equals(token))
-			newItem(token, issueEvent);
+		if (!Objects.equal(getToken(), token))
+			History.replaceItem(token, issueEvent);
 	}
 }
