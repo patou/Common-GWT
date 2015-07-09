@@ -1,9 +1,5 @@
 package com.sfeir.common.gwt.rebind.tokenizer;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
-
 import com.google.gwt.core.ext.TreeLogger;
 import com.google.gwt.core.ext.TreeLogger.Type;
 import com.google.gwt.core.ext.UnableToCompleteException;
@@ -19,6 +15,11 @@ import com.sfeir.common.gwt.client.place.PlaceProperty;
 import com.sfeir.common.gwt.client.place.Property;
 import com.sfeir.common.gwt.client.place.Tokenizer;
 import com.sfeir.common.gwt.client.place.Tokenizer.PropertyType;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+import java.util.Set;
 
 /**
  * This class is modified from the GWT class
@@ -185,6 +186,7 @@ class TokenizerGeneratorContext {
 	JClassType floatClass;
 	JClassType booleanClass;
 	JClassType listClass;
+	JClassType setClass;
 
 	// JClassType listStringClass;
 
@@ -222,8 +224,11 @@ class TokenizerGeneratorContext {
 					return PropertyType.STRING;
 				if (classType.equals(dateClass))
 					return PropertyType.DATE;
-				if (classType.isAssignableTo(listClass) && isForListInterfaces(classType, stringClass)) {
+				if (classType.isAssignableTo(listClass) && isForListInterfaces(classType, stringClass, listClass)) {
 					return PropertyType.LISTSTRING;
+				}
+				if (classType.isAssignableTo(setClass) && isForListInterfaces(classType, stringClass, setClass)) {
+					return PropertyType.SETSTRING;
 				}
 				if (classType.isEnum() != null)
 					return PropertyType.ENUM;
@@ -232,16 +237,16 @@ class TokenizerGeneratorContext {
 		return null;
 	}
 
-	private Boolean isForListInterfaces(JClassType type, JClassType listItemType) {
+	private Boolean isForListInterfaces(JClassType type, JClassType listItemType, JClassType collectionClass) {
 		JClassType rtn = null;
 		JParameterizedType parameterizedType = type.isParameterized();
-		if (parameterizedType != null && listClass.equals(parameterizedType.getBaseType())) {
+		if (parameterizedType != null && collectionClass.equals(parameterizedType.getBaseType())) {
 			return parameterizedType.getTypeArgs()[0].equals(listItemType);
 		}
 		JClassType[] interfaces = type.getImplementedInterfaces();
 		for (JClassType i : interfaces) {
 			parameterizedType = i.isParameterized();
-			if (parameterizedType != null && listClass.equals(parameterizedType.getBaseType())) {
+			if (parameterizedType != null && collectionClass.equals(parameterizedType.getBaseType())) {
 				rtn = parameterizedType.getTypeArgs()[0];
 			}
 		}
@@ -257,6 +262,7 @@ class TokenizerGeneratorContext {
 			doubleClass = requireType(typeOracle, Double.class);
 			floatClass = requireType(typeOracle, Float.class);
 			listClass = requireType(typeOracle, List.class);
+			setClass = requireType(typeOracle, Set.class);
 			booleanClass = requireType(typeOracle, Boolean.class);
 		}
 	}

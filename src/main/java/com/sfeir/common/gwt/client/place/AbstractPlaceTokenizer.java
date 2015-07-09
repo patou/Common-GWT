@@ -1,18 +1,21 @@
 package com.sfeir.common.gwt.client.place;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-
 import com.google.common.base.Joiner;
 import com.google.common.base.Objects;
 import com.google.common.base.Splitter;
 import com.google.gwt.i18n.client.DateTimeFormat;
 import com.google.gwt.place.shared.Place;
+
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  * Abstract PlaceTokenizer
@@ -239,7 +242,21 @@ public abstract class AbstractPlaceTokenizer<P extends Place> implements Tokeniz
 		return list;
 	}
 
-	protected String toStringListString(List<String> value) {
+	protected Set<String> parseSetString(String value) {
+		if (isNull(value))
+			return null;
+		HashSet<String> list = new HashSet<String>();
+		Iterable<String> interator = Splitter.on(LIST_STRING_DELIMITER).omitEmptyStrings().split(unescapeString(value));
+		for (String string : interator) {
+			if ("null".equalsIgnoreCase(string))
+				list.add(null);
+			else
+				list.add(string.replace("%44", ","));
+		}
+		return list;
+	}
+
+	protected String toStringListString(Collection<String> value) {
 		if (value == null || value.isEmpty())
 			return null;
 		ArrayList<String> list = new ArrayList<String>();

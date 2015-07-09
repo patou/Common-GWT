@@ -1,11 +1,5 @@
 package com.sfeir.common.gwt.rebind.tokenizer;
 
-import static com.google.common.base.Strings.isNullOrEmpty;
-
-import java.io.PrintWriter;
-import java.util.HashMap;
-import java.util.Map;
-
 import com.google.gwt.core.client.GWT;
 import com.google.gwt.core.ext.Generator;
 import com.google.gwt.core.ext.GeneratorContext;
@@ -19,6 +13,12 @@ import com.sfeir.common.gwt.client.place.AbstractPlaceTokenizer;
 import com.sfeir.common.gwt.client.place.PlaceProperty;
 import com.sfeir.common.gwt.client.place.Tokenizer;
 import com.sfeir.common.gwt.client.place.Tokenizer.PropertyType;
+
+import java.io.PrintWriter;
+import java.util.HashMap;
+import java.util.Map;
+
+import static com.google.common.base.Strings.isNullOrEmpty;
 
 /**
  * <p>
@@ -178,6 +178,8 @@ public class TokenizerGenerator extends Generator {
 			return "parseBoolean";
 		case LISTSTRING:
 			return "parseListString";
+		case SETSTRING:
+			return "parseSetString";
 		case STRING:
 			return "parseString";
 		case ENUM:
@@ -191,6 +193,8 @@ public class TokenizerGenerator extends Generator {
             case DATE:
                 return "toStringDate";
             case LISTSTRING:
+                return "toStringListString";
+			case SETSTRING:
                 return "toStringListString";
             default:
                 return "toString";
